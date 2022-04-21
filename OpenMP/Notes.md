@@ -114,6 +114,18 @@ void Hello(void) {
 * Atomic Ops --> Expensive
 * Synchronization --> Correctness vs. Performance
 
+## OpenMP Reduction Clause
+```c
+  #pragma omp parallel for
+  for(int i=0;i<1000;i++){
+    // reduction(<operator>: <variable list>);
+    reduction(+, some_arr);
+  }
+}
+```
+## Only For-Loops that can be Parallelized
+![Only legal forms](legal_omp_for_loops.png)
+
 ## Running OpenMP Code
 ```shell
 gcc -g -Wall -fopenmp -o omp_hello omp_hello.c
