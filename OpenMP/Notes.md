@@ -123,6 +123,47 @@ void Hello(void) {
   }
 }
 ```
+
+## Public/Private/Shared Variables
+* **default(none)** forces you to explicitly say which vairables are shared and private
+```c
+  #pragma omp parallel for num_threads(thread_count) \
+    default(none), shared(some_arr), private(i)
+  for(int i=0;i<1000;i++){
+    reduction(+, some_arr);
+  }
+}
+```
+
+## Scheduling - Schedule Clause
+* Types
+  * Static --> Iterations can be assigned before loop is executed
+
+```c
+schedule(static, 1)
+// Each thread gets 1 iteration, round robin
+// T0: [0,3,6,9]
+// T1: [1,4,7,10]
+// T2: [2,5,8,11]
+```
+```c
+schedule(static, 4)
+// Each thread gets 1 iteration, round robin
+// T0: [0,1,2,3]
+// T1: [4,5,6,7]
+// T2: [8,9,10,11]
+```
+  * Dynamic/Guided --> Iterations are assigned while loop is executing
+  * Auto --> Run-time determines schedule 
+```c
+  #pragma omp parallel for
+  for(int i=0;i<1000;i++){
+    // reduction(<operator>: <variable list>);
+    reduction(+, some_arr);
+  }
+}
+```
+
 ## Only For-Loops that can be Parallelized
 ![Only legal forms](legal_omp_for_loops.png)
 
