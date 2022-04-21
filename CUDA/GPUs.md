@@ -10,5 +10,20 @@
     * 10x faster than GPUs for sequential
   * GPUs do parallel parts
     * 10x faster than CPUs for parallel
-
-  
+## GPU Structure
+* GPU has it's own memory
+ * Memory of GPU --> Optimized for bandwidth
+ * SLOW from memory address to getting data
+ * Why?
+  * Trade-off between speed and bandwidth
+  * Feed execution units with lots of data
+* GPU compared to other chips
+ * Good for subset of applications
+ * Problem? Power consumption, liquid cooling needed
+* Regularity + Massive Parallelism = GPU-Friendly
+ * **Best performance:**
+  * Computation intensive
+  * Many independent computations
+  * Many similar computations
+  * Problem size is big enough
+* Example: Matrix Multiplication
