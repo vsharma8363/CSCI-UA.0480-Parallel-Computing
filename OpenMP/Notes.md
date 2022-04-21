@@ -76,6 +76,44 @@ void Hello(void) {
 }
 ```
 
+## Prevent atomic accesses
+* We need to make sure that something is accessed **atomically**, only one thread at one time
+```c
+  #pragma omp parallel for
+  for(int i=0;i<1000;i++){
+    #pragma omp atomic
+    do_something(arr[i]) 
+  }
+}
+```
+* You are sequential now **AND** it's slower than single thread
+
+### How to enhance atomic operations (nowait)
+* No wait will tell the thread to keep going after it finishes a block
+```c
+  #pragma omp parallel for
+  for(int i=0;i<1000;i++){
+    #pragma omp nowait
+    for(...){}
+    #pragma omp atomic
+    do_something(arr[i]);
+  }
+}
+```
+### Single/Master Thread
+* This code is only executed by the master thread
+```c
+  #pragma omp parallel for
+  for(int i=0;i<1000;i++){
+    #pragma omp single
+    do_something(arr[i]);
+  }
+}
+```
+
+* Atomic Ops --> Expensive
+* Synchronization --> Correctness vs. Performance
+
 ## Running OpenMP Code
 ```shell
 gcc -g -Wall -fopenmp -o omp_hello omp_hello.c
