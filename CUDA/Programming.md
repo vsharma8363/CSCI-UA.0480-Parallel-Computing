@@ -118,7 +118,8 @@ cudaFree(Md);
 ```
 
 # Kernels
-* __global__ defines a kernel function - must **return void**
-* __device__ and __host__ can be used together
+* *__global__* defines a kernel function - must **return void**
+* *__device__* and *__host__* can be used together
 
-
+## Hello World of Parallel Programming: Matrix Multiplication
+* Data Parallelism --> Many operations on data structures at the same time
