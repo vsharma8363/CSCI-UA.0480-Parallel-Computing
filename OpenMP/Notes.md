@@ -172,3 +172,48 @@ schedule(static, 4)
 gcc -g -Wall -fopenmp -o omp_hello omp_hello.c
 ./omp_hello
 ```
+
+# Queues in OpenMP
+* Data structure in multithreaded apps
+* Enqueue and Dequeue
+* Several 'producer' threads and 'consumer' threads
+  * Producers --> Produce request for data
+  * Consumer --> Consume the data
+
+### Example: Message-Passing
+* Each thread has shared message queue
+* Any thread can enqueue messages in another thread
+  * Only owner can dequeue
+
+## Locks
+* Locks --> Data structure that enforces **mutual exclusion**
+* Lock is slow --> OS is managing data structures
+  * **slower than ATOMIC** 
+* Do not mix atomic and critical for same variable
+```c
+omp_lock_t lock_p;
+omp_init_lock(lock_p);
+omp_set_lock(lock_p);
+omp_unset_lock(lock_p);
+omp_destroy_lock(lock_p);
+```
+* No guarantee of fairness in MUTEX
+  * Thread can be blocked forever
+* Can be dangerous to NEST Mutex constructs
+
+## Sections
+```c
+#pragma omp parallel sections
+{
+  #pragma omp section
+  { 
+    // One thread will execute this
+    printf ("id = %d, \n", omp_get_thread_num());
+  }
+  #pragma omp section
+  { 
+    // Another thread will execute this
+    printf ("id = %d, \n", omp_get_thread_num());
+  }
+}
+```
