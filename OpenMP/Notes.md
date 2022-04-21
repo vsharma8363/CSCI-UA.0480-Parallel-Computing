@@ -217,3 +217,16 @@ omp_destroy_lock(lock_p);
   }
 }
 ```
+
+## Five Reasons for Poor Performance
+1. Sequential Code
+2. Communication
+3. Load Imbalance
+4. Synchronization
+5. Compiler Non-optimization
+
+* If:
+  * Several nodes in machine
+  * Two levels of parallelism
+* Then:
+  * OpenMP + MPI might be good 
