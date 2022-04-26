@@ -1,4 +1,4 @@
-# OpenMP Programming in C
+# Notes on OpenMP Programming in C
 
 ## Basic Example
 ```c
