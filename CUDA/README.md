@@ -1,5 +1,7 @@
 # GPU Programming with CUDA
 
+** REMEMBER TO FREE with cudaFree(Md); **
+
 ## Parallel Computing on GPUs
 * 13.8k GFLOPS
   * Laptops, clusters, etc.
@@ -123,3 +125,62 @@ cudaFree(Md);
 
 ## Hello World of Parallel Programming: Matrix Multiplication
 * Data Parallelism --> Many operations on data structures at the same time
+
+### Sequential Matrix Multiplication
+* Turning input arrays M & N into P
+```c
+for (int i = 0; i < Width; ++i) {
+ for (int j = 0; j < Width; ++j) {
+  double sum = 0;
+  for (int k = 0; k < Width; ++k) {
+   double a = M[i][j];
+   double b = N[i][j];
+   sum += a * b;
+  }
+  P[i][j] = sum;
+ }
+}
+```
+
+### Parallelized Matrix Multiplication Problem
+```c
+void MatrixMultiply(float* h_M, float* h_N, float* h_P, int Width) {
+ // Allocating a 2D array as a 1D array
+ int size = Width * Width * sizeof(float);
+ float* d_M, d_N, d_P;
+
+ // Transfer to device memory
+ cudaMalloc((void**), &d_M, size);
+ cudaMemcpy(d_M, h_M, size, cudaMemcpyHostToDevice);
+ cudaMalloc((void**), &d_N, size);
+ cudaMemcpy(d_N, h_N, size, cudaMemcpyHostToDevice);
+ // Allocate output P on device
+ cudaMalloc((void**), &d_P, size);
+ 
+ // Kernel invocation code ???
+ 
+ // Transfer P to host
+ cudaMemcpy(h_P, d_P, size, cudaMemcpyDeviceToHost);
+ // Free all data
+ cudaFree(d_M); cudaFree(d_N); cudaFree(d_P);
+```
+
+### Dimensions in CUDA
+```c
+// Execution configuration
+dim3 dimGrid(x,y,z);
+dim3 dimBlock(x,y,z);
+//Launchign the device computation threads
+kernel<<<dimGrid, dimBlock>>>(....);
+```
+* Must know the following:
+  * Maximum dimensions per block
+  * Max threads per block
+  * Max dimensions of grid
+  * Max number of blocks/grid
+
+## Executing a CUDA program
+* Compiler: NVCC
+```
+nvcc -o prog prog.cu
+```
