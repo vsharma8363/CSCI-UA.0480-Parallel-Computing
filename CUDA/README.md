@@ -45,33 +45,33 @@ int main(int argc, char* argv[]) {
 * All threads run same code --> SINGLE PROGRAM in SPMD
 * Each thread --> ID
 * ID = blockIdx.x * blockDim.x + threadIdx.x;
- * blockIdx.x (y or z)
- * blockDim.x (y or z)
- * threadIdx.x (y or z)
+  * blockIdx.x (y or z)
+  * blockDim.x (y or z)
+  * threadIdx.x (y or z)
 * Thread Blocks
- * Divide thread array into blocks
- * Threads within block cooperate with
-  * Shared memory
-  * Atomic ops
-  * Barrier sync
- * Threads in different blocks **cannot** cooperate
+  * Divide thread array into blocks
+  * Threads within block cooperate with
+    * Shared memory
+    * Atomic ops
+    * Barrier sync
+  * Threads in different blocks **cannot** cooperate
 
 ### Levels of CUDA
 1. Kernel
- * Launched by host
- * like C function
- * Executed on device
+  * Launched by host
+  * like C function
+  * Executed on device
 2. Grid
- * 1D, 2D, 3D
- * gridDim.x, gridDim.y, gridDim.z --> size of grid
+  * 1D, 2D, 3D
+  * gridDim.x, gridDim.y, gridDim.z --> size of grid
 3. Block
- * 1D, 2D, 3D
+  * 1D, 2D, 3D
 4. Thread
 
 ## IDs
 * Thread uses ID to decide data to work on
- * Block ID: 1D, 2D, or 3D
- * Thread ID: 1D, 2D, or 3D
+  * Block ID: 1D, 2D, or 3D
+  * Thread ID: 1D, 2D, or 3D
 
 ## Example 2 - Vector Addition
 ```c
@@ -96,18 +96,18 @@ void vecAdd(float* A, float* B, float* C) {
 
 ### CUDA Memory Model
 * Global Memory
- * Main means of communicating R/W Data between host and device
- * Contents visible to all threads
+  * Main means of communicating R/W Data between host and device
+  * Contents visible to all threads
 * Shared memory
- * Per SM
- * Shared by all threads in a block
+  * Per SM
+  * Shared by all threads in a block
 
 #### CUDA Memory Allocation
 * cudaMalloc()
- * Allocates object in *global memory*
- * Requires addy of pointer, size of object
+  * Allocates object in *global memory*
+  * Requires addy of pointer, size of object
 * cudaFree()
- * Frees object from device Global memory
+  * Frees object from device Global memory
 
 ```c
 WIDTH = 64;
