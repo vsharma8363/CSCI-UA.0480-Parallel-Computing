@@ -20,7 +20,7 @@
 #### cudaGetDeviceProperties()
 * Called by the host to get info about the device properties
 
-![cudaGetDeviceProperties](cuda_structure.png)
+![cudaGetDeviceProperties](cuda_properties.png)
 
 * you can also use **cudaGetDeviceCount(int* count)** to get num devices
 
