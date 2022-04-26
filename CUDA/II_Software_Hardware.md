@@ -34,5 +34,17 @@ for (int deviceID = 0; deviceID < numDevices; deviceID++) {
 }
 ```
 
+#### Synchronization Points
+```c
+__syncthreads()
+```
+* Only threads **in the same block** can sync
+ * Why? *to prevent a deadlock*
+* Thread that makes call will be held at location until every thread reaches that location
+* Be weary of if-then-else
+ * IF sync threads are different, you will get a deadlock
+* Ability to execute same app code on hardware with different number of execution resources --> transparent scalability
+
+#### Scheduling of Blocks
 
 
