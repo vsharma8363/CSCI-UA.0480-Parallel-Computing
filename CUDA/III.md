@@ -30,4 +30,16 @@
 
 * Each access to registers involves fewer machine-level instructions
 * Aggregate register files --> 2 orders of magnitude of global
-*      
+
+Announcements:
+- Only Cuda III is covered on final
+- Previous exams will be posted today without solutions
+- Exam: May 12th (time of lecture) - 2pm
+ - 24 hours to solve it
+- Lab 3:
+ -  In real cases: You need to include memcopy, malloc
+ -  Just put start/stop around the kernel
+ -  --> 1) Make sure the kernel runs (make a printf or something)
+ -  --> 2) If the kernel launches, then include the cudamemcpy back or you can put after the kernel,
+ -  Start --> Kernel --> cudaDeviceSynchronize (blocking the host until the device finishes) --> Stop
+ -  It doesn't matter if you have speedup or slowdown
