@@ -1,5 +1,8 @@
 # Parallel-Computing
 
+## About this repo
+This contains all the labwork and notes on the Parallel Computing class taught by Mohamed Zahran at NYU for Spring 2022
+
 ## Connecting to the [Courant Clusters](https://cims.nyu.edu/webapps/content/systems/resources/computeservers)
 * Number crunching --> crunchy1-5 (crunchy1.cims.nyu.edu)
 * CUDA --> cuda1-5 (cuda1.cims.nyu.edu)
